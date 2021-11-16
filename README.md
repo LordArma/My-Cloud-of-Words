@@ -14,6 +14,7 @@
 
 ## مثال
 پس از اجرای این اسکریپت با متن مربوط به زبان برنامه‌نویسی پایتون و لوگوی پایتون شاهد چنین تصویری خواهید بود:
+
 ![ابر کلمات پایتون](https://raw.githubusercontent.com/LordArma/My-Cloud-of-Words/master/example.jpg)
 
 </div>
