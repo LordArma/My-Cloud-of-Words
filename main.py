@@ -1,13 +1,15 @@
 # This Python file uses the following encoding: utf-8
 
-from wordcloud import WordCloud
-from wordcloud import STOPWORDS
-import matplotlib.pyplot as plt
-from PIL import Image
-import numpy as np
-from wordcloud import ImageColorGenerator
-from bidi.algorithm import get_display
+import re
+
 import arabic_reshaper
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+from bidi.algorithm import get_display
+from wordcloud import ImageColorGenerator
+from wordcloud import STOPWORDS
+from wordcloud import WordCloud
 
 
 def read_text():
@@ -19,36 +21,13 @@ def remove_stops(text):
     f = open("stops.txt", "r")
     lines = f.readlines()
     for line in lines:
-        text = text.replace("۱", " ")
-        text = text.replace("۲", " ")
-        text = text.replace("۳", " ")
-        text = text.replace("۴", " ")
-        text = text.replace("۵", " ")
-        text = text.replace("۶", " ")
-        text = text.replace("۷", " ")
-        text = text.replace("۸", " ")
-        text = text.replace("۹", " ")
-        text = text.replace("۰", " ")
-        text = text.replace("{", " ")
-        text = text.replace("}", " ")
         text = text.replace("[", " ")
         text = text.replace("]", " ")
-        text = text.replace("(", " ")
-        text = text.replace(")", " ")
-        text = text.replace("»", " ")
-        text = text.replace("«", " ")
-        text = text.replace(":", " ")
-        text = text.replace("!", " ")
-        text = text.replace("؟", " ")
-        text = text.replace(".", " ")
-        text = text.replace("،", " ")
-        text = text.replace("؛", " ")
-        text = text.replace("'", " ")
         text = text.replace('"', ' ')
-        text = text.replace("@", " ")
         text = text.replace("^", " ")
-        text = text.replace("-", " ")
-        text = text.replace("ـ", " ")
+
+        text = re.sub("[۱۲۳۴۵۶۷۸۹۰{}()«»?؟@:.;،؛!'ـ-]", " ", text)
+
         text = text.replace("‌", " ")
         text = text.replace(f" {line.strip()} ", " ")
         text = text.replace(f"\n{line.strip()} ", " ")
@@ -62,7 +41,6 @@ def remove_stops(text):
 
 def make():
     the_text = read_text()
-
     the_text = remove_stops(the_text)
     the_text = arabic_reshaper.reshape(the_text)
     the_text = get_display(the_text)
