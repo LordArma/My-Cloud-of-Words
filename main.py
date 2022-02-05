@@ -42,8 +42,10 @@ def remove_stops(text):
 def make():
     the_text = read_text()
     the_text = remove_stops(the_text)
-    the_text = arabic_reshaper.reshape(the_text)
-    the_text = get_display(the_text)
+
+    # Uncomment these two lines in macOS
+    # the_text = arabic_reshaper.reshape(the_text)
+    # the_text = get_display(the_text)
 
     font_path = 'Vazir.ttf'
 
